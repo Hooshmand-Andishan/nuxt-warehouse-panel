@@ -46,7 +46,8 @@ const config: NuxtConfig = {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -57,6 +58,31 @@ const config: NuxtConfig = {
       common: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
+      }
+    }
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        url: 'http://localhost:8000',
+        token: {
+          property: 'token',
+        },
+        user: {
+          property: 'data'
+        },
+        endpoints: {
+          login: {
+            url: 'http://localhost:8000/api/auth/login'
+          },
+          user: {
+            url: 'http://localhost:8000/api/auth/me'
+          },
+          logout: {
+            url: 'http://localhost:8000/api/auth/logout'
+          }
+        }
       }
     }
   },
